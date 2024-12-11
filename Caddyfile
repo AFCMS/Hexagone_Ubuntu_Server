@@ -1,0 +1,19 @@
+{
+        servers {
+                protocols h1 h2 h3
+        }
+}
+
+https://ubuntu-group-4 {
+        tls internal
+
+        handle_path /grafana* {
+                reverse_proxy :3000
+        }
+
+        handle_path /* {
+                encode gzip
+                file_server
+                root * /var/www
+        }
+}
